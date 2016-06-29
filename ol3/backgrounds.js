@@ -18,8 +18,8 @@ function resolution(zoom) {
 
 function layer(options) {
   return new ol.layer.Tile({
-    minResolution: resolution(options.maxZoom),
-    maxResolution: resolution(options.minZoom),
+    minResolution: resolution(options.maxZoom)-1,
+    maxResolution: resolution(options.minZoom)+1,
     source: new ol.source.XYZ({
       url: options.url,
       minZoom: options.minZoom,
@@ -43,12 +43,12 @@ var backgrounds = [
       layer({
         url: URL.MQ,
         minZoom: 7,
-        maxZoom: 19,
+        maxZoom: 19
       }),
       layer({
         url: URL.TOPOICC,
         minZoom: 7,
-        maxZoom: 20,
+        maxZoom: 20
       })
     ]
   }),
@@ -128,7 +128,8 @@ var map = new ol.Map({
   target: 'map',
   view: new ol.View({
     center: ol.proj.transform([2.1685, 41.3818], 'EPSG:4326', 'EPSG:3857'),
-    zoom: 8
+    zoom: 8,
+    minZoom: 1
   })
 });
 
